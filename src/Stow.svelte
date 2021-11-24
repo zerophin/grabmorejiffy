@@ -11,16 +11,15 @@
   let colors = ['green', 'blue', 'yellow', 'red', 'purple', 'orange', 'black'];
   const getRandColor = () => colors[Math.floor(Math.random() * colors.length)]
   let person = {position: 0};
+
   let step = 0;
   $: done = step >= packages.length;
+
   let movespeed = 400;
   $: movespeedAdjusted = movespeed * .25
 
   $: remaining = packages.length - (split * Math.ceil(step / split));
-  // $: console.log(person.position)
-  $: console.log(movespeed)
   $: generatedAnimation = generateAnimation(packages, split, time);
-  console.log({generatedAnimation})
 
   async function handleAnimation() {
     step = 0;

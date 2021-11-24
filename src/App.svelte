@@ -1,13 +1,9 @@
 <script>
   import Stow from "./Stow.svelte";
-  import {gen, getTime, newWay} from "./logic";
+  import {gen} from "./logic";
 
-  let packageCount = 15;
-
-  let split = 5;
-  let packages = gen(50)
-  let time = getTime(packages, split)
-  let first = {packages, split};
+  let packageCount = 50;
+  let packages = gen(packageCount)
 
 </script>
 <div>
