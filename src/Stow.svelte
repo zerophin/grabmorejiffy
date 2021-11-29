@@ -20,7 +20,11 @@
 
   $: remaining = packages.length - (split * Math.ceil(step / split));
   $: generatedAnimation = generateAnimation(packages, split, time);
+  $: console.log(generatedAnimation)
 
+  // Do not show is true if the animation is simply leaving the A position
+  // without actually dropping a package off
+  let doNotShow = false;
   async function handleAnimation() {
     step = 0;
     for (let i = 0; i < generatedAnimation.length; i++) {
@@ -29,6 +33,9 @@
       movespeed = letter.stepsTo ?? movespeed;
       if (!letter.isDefault) {
         step++;
+        doNotShow = false;
+      } else {
+        doNotShow = true;
       }
       await sleep(movespeedAdjusted + 900)
     }
@@ -77,9 +84,11 @@
                          in:receive
                          out:send>
                     </div>
-                    <div in:fade="{{delay: 500}}"
-                         out:fly="{{ duration: 300, x: 0, y: -100, opacity: 0.5, easing: quintOut}}"
-                         id="package">{done ? 'problem solve' : 'Amazon'}</div>
+                    {#if !doNotShow}
+                        <div in:fade="{{delay: 500}}"
+                             out:fly="{{ duration: 300, x: 0, y: -100, opacity: 0.5, easing: quintOut}}"
+                             id="package">{done ? 'Done!' : 'Amazon'}</div>
+                    {/if}
                 {/if}
             </div>
         {/each}
