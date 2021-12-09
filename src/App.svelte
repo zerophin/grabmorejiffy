@@ -14,6 +14,7 @@
     <main>
         <div class="container">
             <Stow packages={packages} split={5}/>
+            <Stow packages={packages} split={3}/>
             <Stow packages={packages} split={1}/>
         </div>
     </main>
